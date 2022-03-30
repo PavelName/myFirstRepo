@@ -1,4 +1,4 @@
-const myfirstvar = 45;
+const myfirstvar = 35;
 
 const myFunc = () => {
 
