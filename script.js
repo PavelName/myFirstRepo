@@ -1,7 +1,5 @@
-const myCity = {
-    city: "New York",
-    popular: true,
-    country: "USA"
-}
+alert('Hello my lesson');
+console.log('hello!!!')
 
-console.log('Hello world');
+
+
