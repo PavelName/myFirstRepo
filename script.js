@@ -3,3 +3,5 @@ const myCity = {
     popular: true,
     country: "USA"
 }
+
+console.log('Hello world');
