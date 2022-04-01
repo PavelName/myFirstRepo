@@ -1,5 +1,6 @@
-alert('Hello my lesson');
-console.log('hello!!!')
+let title = 'project';
+let screens = 'simple, complex, interactive';
+let screenPrice = '45';
 
 
 
