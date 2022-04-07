@@ -35,5 +35,5 @@ if (fullPrice > 30000) {
 } else if (fullPrice < 15000 && fullPrice > 0) {
     console.log('Скидка не предусмотрена');
 } else if (fullPrice < 0) {
-    console.log('Что то пошло не так!')
+    console.log('Что то пошло не так!');
 }
