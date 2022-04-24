@@ -1,26 +1,47 @@
 'use strict';
 
-let title = prompt('Как называется ваш проект?');
-let screens = prompt('Какие типы экранов нужно разработать?');
-let screenPrice = +prompt('Сколько будет стоить данная работа?');
-let adaptive = confirm('Нужен ли адаптив на сайте?');
-
-let service1 = prompt('Каой дополнительный тип услуг нужен?');
-let servicePrice1 = +prompt('Сколько это будет стоить?');
-let service2 = prompt('Каой дополнительный тип услуг нужен?');
-let servicePrice2 = +prompt('Сколько это будет стоить?');
+let title; 
+let screens; 
+let screenPrice; 
+let adaptive; 
 
 let rollback = 10;
 let allServicePrices;
 let fullPrice;
 let servicePercentPrice;
+let service1; 
+let service2; 
+
 
 // Тип - function expression
-
-const getAllServicePrices = function () {
-    return screenPrice + servicePrice1 + servicePrice2;
+const isNumber = function(num) {
+    return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
+
+const asking = function () {
+    title = prompt('Как называется ваш проект?');
+    screens = prompt('Какие типы экранов нужно разработать?');
+    screenPrice = prompt('Сколько будет стоить данная работа?');
+    while(!isNumber(screenPrice)) {
+        screenPrice = prompt('Сколько будет стоить данная работа?');  
+    }
+    adaptive = confirm('Нужен ли адаптив на сайте?');   
+};
+
+const getAllServicePrices = function () {
+    let sum =0;
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            service1 = prompt('Какой дополнительный тип услуг нужен?');
+        } else if (i === 1) {
+            service2 = prompt('Каой дополнительный тип услуг нужен?');
+        }
+        sum += +prompt("Сколько это будет стоить?");
+    }
+
+    return sum;
+};
 const getTitle = function () {
     return title.trim()[0].toUpperCase() + title.trim().substring(1).toLowerCase();
 };
@@ -50,7 +71,7 @@ function getFullPrice() {
     return screenPrice + allServicePrices;
 }
 
-
+asking();
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
