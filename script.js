@@ -12,16 +12,18 @@ const yesDay = {
      fullPrice: 0,
      servicePercentPrice: 0,
      service1: '', 
-     service: '', 
+     service2: '', 
 
      asking: function () {
         yesDay.title = prompt('Как называется ваш проект?');
     
         yesDay.screens = prompt('Какие типы экранов нужно разработать?');
     
-        while(!isNumber(yesDay.screenPrice)) {
+       do {
             yesDay.screenPrice = prompt('Сколько будет стоить данная работа?'); 
         }
+        while(!isNumber(yesDay.screenPrice));
+
         yesDay.adaptive = confirm('Нужен ли адаптив на сайте?');
     
 }
@@ -35,13 +37,20 @@ const isNumber = function(num) {
 
 const getAllServicePrices = function () {
     let sum = 0;
-    for (let i = 0; i < 2; i++) {
+
+    for (let i = 0; i < 2; i++){ 
+        let price = 0;
+
         if (i === 0) {
             yesDay.service1 = prompt('Какой дополнительный тип услуг нужен?');
         } else if (i === 1) {
             yesDay.service2 = prompt('Каой дополнительный тип услуг нужен?');
         }
-        sum += +prompt("Сколько это будет стоить?");
+        do{ 
+    price = prompt("Сколько это будет стоить?");
+        }
+        while(!isNumber(price));
+        sum += +price;
     }
     return sum;
 };
