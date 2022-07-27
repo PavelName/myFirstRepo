@@ -13,14 +13,19 @@ const yesDay = {
      servicePercentPrice: 0,
      service1: '', 
      service2: '', 
-     start:function() {
+     start: function() {
         yesDay.asking();
-        yesDay.allServicePrices = getAllServicePrices();
-        yesDay.fullPrice = getFullPrice();
-        yesDay.servicePercentPrice = getServicePercentPrices();
-        yesDay.title = getTitle();
-     },
+         yesDay. getAllServicePrices();
+         yesDay. getFullPrice();
+        yesDay.getServicePercentPrices();
+         yesDay. getTitle();
 
+        yesDay.logger();
+     },
+     isNumber : function(num) {
+        return !isNaN(parseFloat(num)) && isFinite(num);
+    },
+    
      asking: function () {
         yesDay.title = prompt('Как называется ваш проект?');
     
@@ -29,20 +34,14 @@ const yesDay = {
        do {
             yesDay.screenPrice = prompt('Сколько будет стоить данная работа?'); 
         }
-        while(!isNumber(yesDay.screenPrice));
+        while(!yesDay.isNumber(yesDay.screenPrice));
 
         yesDay.adaptive = confirm('Нужен ли адаптив на сайте?');
     
-}
-};
-
-// Тип - function expression
-const isNumber = function(num) {
-    return !isNaN(parseFloat(num)) && isFinite(num);
-};
+},
 
 
-const getAllServicePrices = function () {
+ getAllServicePrices : function () {
     let sum = 0;
 
     for (let i = 0; i < 2; i++){ 
@@ -56,22 +55,25 @@ const getAllServicePrices = function () {
         do{ 
     price = prompt("Сколько это будет стоить?");
         }
-        while(!isNumber(price));
+        while(!yesDay.isNumber(price));
         sum += +price;
     }
-    return sum;
-};
+    yesDay.allServicePrices = sum;
+},
 
-const getTitle = function () {
-    return yesDay.title.trim()[0].toUpperCase() + yesDay.title.trim().substr(1).toLowerCase();
-};
+getFullPrice : function () {
+    yesDay.fullPrice = +yesDay.screenPrice  +yesDay.allServicePrices;
+},
 
+getServicePercentPrices : function () {
+    yesDay.servicePercentPrice =  yesDay.fullPrice - (yesDay.fullPrice * (yesDay.rollback / 100));
+},
 
-const getServicePercentPrices = function () {
-    return yesDay.fullPrice - (yesDay.fullPrice * (yesDay.rollback / 100));
-};
+ getTitle : function () {
+    yesDay.title = yesDay.title.trim()[0].toUpperCase() + yesDay.title.trim().substr(1).toLowerCase();
+},
 
-const getRollbackMessage = function (price) {
+ getRollbackMessage : function (price) {
     if (price > 30000) {
         return ('Делаем скидку 10%');
     } else if (price > 15000 && price < 30000) {
@@ -81,15 +83,14 @@ const getRollbackMessage = function (price) {
     } else if (price < 0) {
         return ('Что то пошло не так!');
     }
-};
+},
 
 
-// Тип - function declaration
-function getFullPrice() {
-    return +yesDay.screenPrice  +yesDay.allServicePrices;
-}
-
-
+logger: function() {
 
 console.log(yesDay.fullPrice);
 console.log(yesDay.servicePercentPrice);
+},
+};
+
+yesDay.start(); 
