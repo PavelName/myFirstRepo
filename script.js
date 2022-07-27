@@ -13,6 +13,13 @@ const yesDay = {
      servicePercentPrice: 0,
      service1: '', 
      service2: '', 
+     start:function() {
+        yesDay.asking();
+        yesDay.allServicePrices = getAllServicePrices();
+        yesDay.fullPrice = getFullPrice();
+        yesDay.servicePercentPrice = getServicePercentPrices();
+        yesDay.title = getTitle();
+     },
 
      asking: function () {
         yesDay.title = prompt('Как называется ваш проект?');
@@ -82,11 +89,7 @@ function getFullPrice() {
     return +yesDay.screenPrice  +yesDay.allServicePrices;
 }
 
-yesDay.asking();
-yesDay.allServicePrices = getAllServicePrices();
-yesDay.fullPrice = getFullPrice();
-yesDay.servicePercentPrice = getServicePercentPrices();
-yesDay.title = getTitle();
+
 
 console.log(yesDay.fullPrice);
 console.log(yesDay.servicePercentPrice);
