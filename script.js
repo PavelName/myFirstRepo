@@ -30,11 +30,11 @@ const yesDay = {
     
 
         for (let i = 0; i < 2; i++) {
-            let name =  prompt('Какие типы экранов нужно разработать?','Простые');
+            let name =  prompt('Какие типы экранов нужно разработать?','Простые','Сложные');
             let price = 0;
 
             do {
-                price = prompt('Сколько будет стоить данная работа?'); 
+                price = prompt('Сколько будет стоить данная работа?','1000'); 
             }
             while(!yesDay.isNumber(price));
 
