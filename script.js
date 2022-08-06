@@ -4,22 +4,21 @@
 const yesDay = {
 
      title: '', 
-     screens: '', 
+     screens:[], 
      screenPrice: 0, 
      adaptive: true, 
      rollback:  10,
      allServicePrices: 0,
      fullPrice: 0,
      servicePercentPrice: 0,
-     service1: '', 
-     service2: '', 
+     services:{}, 
+      
      start: function() {
         yesDay.asking();
-         yesDay. getAllServicePrices();
-         yesDay. getFullPrice();
+        yesDay.addPrices();
+        yesDay. getFullPrice();
         yesDay.getServicePercentPrices();
-         yesDay. getTitle();
-
+        yesDay. getTitle();
         yesDay.logger();
      },
      isNumber : function(num) {
@@ -27,41 +26,49 @@ const yesDay = {
     },
     
      asking: function () {
-        yesDay.title = prompt('Как называется ваш проект?');
+     yesDay.title = prompt('Как называется ваш проект?');
     
-        yesDay.screens = prompt('Какие типы экранов нужно разработать?');
-    
-       do {
-            yesDay.screenPrice = prompt('Сколько будет стоить данная работа?'); 
+
+        for (let i = 0; i < 2; i++) {
+            let name =  prompt('Какие типы экранов нужно разработать?','Простые');
+            let price = 0;
+
+            do {
+                price = prompt('Сколько будет стоить данная работа?'); 
+            }
+            while(!yesDay.isNumber(price));
+
+            yesDay.screens.push({id: i, name:name, price:price});
+
         }
-        while(!yesDay.isNumber(yesDay.screenPrice));
+       
+
+        for (let i = 0; i < 2; i++){ 
+            let name = prompt('Какой дополнительный тип услуг нужен?');
+            let price = 0;
+    
+            do{ 
+        price = prompt("Сколько это будет стоить?");
+            }
+            while(!yesDay.isNumber(price));
+            yesDay.services[name] = +price;   
+        }
 
         yesDay.adaptive = confirm('Нужен ли адаптив на сайте?');
     
 },
 
-
- getAllServicePrices : function () {
-    let sum = 0;
-
-    for (let i = 0; i < 2; i++){ 
-        let price = 0;
-
-        if (i === 0) {
-            yesDay.service1 = prompt('Какой дополнительный тип услуг нужен?');
-        } else if (i === 1) {
-            yesDay.service2 = prompt('Каой дополнительный тип услуг нужен?');
-        }
-        do{ 
-    price = prompt("Сколько это будет стоить?");
-        }
-        while(!yesDay.isNumber(price));
-        sum += +price;
+addPrices: function() {
+    for (let screen of yesDay.screens) {
+        yesDay.screenPrice += +screen.price;
     }
-    yesDay.allServicePrices = sum;
-},
+    for(let key in yesDay.services) {
+        yesDay.allServicePrices += yesDay.services[key];
+    }
+}, 
 
-getFullPrice : function () {
+
+getFullPrice: function () {
     yesDay.fullPrice = +yesDay.screenPrice  +yesDay.allServicePrices;
 },
 
@@ -90,6 +97,7 @@ logger: function() {
 
 console.log(yesDay.fullPrice);
 console.log(yesDay.servicePercentPrice);
+console.log(yesDay.screens);
 },
 };
 
